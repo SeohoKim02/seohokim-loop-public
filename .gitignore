@@ -1,0 +1,19 @@
+# Copyright 2026 SeohoKim
+# SPDX-License-Identifier: Apache-2.0
+
+node_modules/
+dist/
+dist-electron/
+artifacts/
+*.log
+.env
+.env.*
+!.env.example
+# User connection files belong in Electron userData, not the repository.
+openai-compatible-connection.json
+openai-compatible-connection.json.tmp
+anthropic-connection.json
+anthropic-connection.json.tmp
+loop-history/
+.DS_Store
+Thumbs.db

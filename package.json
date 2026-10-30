@@ -1,0 +1,52 @@
+{
+  "name": "seohokim-loop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "여러 AI의 협업을 위한 Windows 데스크톱 앱 — v0.1 Mock 실행",
+  "type": "module",
+  "main": "dist-electron/electron/main.cjs",
+  "engines": {
+    "node": ">=24.22.1 <25"
+  },
+  "scripts": {
+    "dev": "tsc -p tsconfig.electron.json && node scripts/desktop.mjs --dev",
+    "start": "npm run build && node scripts/desktop.mjs",
+    "build": "npm run typecheck && vite build && tsc -p tsconfig.electron.json",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "test": "node --test tests/*.test.ts",
+    "test:desktop": "npm run build && node scripts/smoke.mjs --background",
+    "test:provider": "npm run build && node scripts/provider-smoke.mjs --background",
+    "test:settings": "npm run build && node scripts/settings-smoke.mjs --background",
+    "test:anthropic": "npm run build && node scripts/anthropic-smoke.mjs --background",
+    "test:collaboration": "npm run build && node scripts/collaboration-smoke.mjs --background",
+    "test:auto": "npm run build && node scripts/auto-smoke.mjs --background",
+    "test:auto-retry": "npm run build && node scripts/auto-retry-smoke.mjs --background",
+    "test:auto-fallback": "npm run build && node scripts/auto-fallback-smoke.mjs --background",
+    "test:parallel": "npm run build && node scripts/parallel-smoke.mjs --background",
+    "test:export": "npm run build && node scripts/export-smoke.mjs --background",
+    "test:history": "npm run build && node scripts/history-smoke.mjs --background",
+    "test:history-resave": "npm run build && node scripts/history-resave-smoke.mjs --background",
+    "test:history-search": "npm run build && node scripts/history-search-smoke.mjs --background",
+    "test:attachments": "npm run build && node scripts/attachments-smoke.mjs --background",
+    "test:pdf": "npm run build && node scripts/attachments-smoke.mjs --pdf --background",
+    "test:cancellation": "npm run build && node scripts/cancellation-smoke.mjs --background",
+    "test:codex": "npm run build && node scripts/codex-cli-smoke.mjs --background",
+    "test:ollama": "npm run build && node scripts/ollama-smoke.mjs --background"
+  },
+  "dependencies": {
+    "pdfjs-dist": "6.4.299",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "electron": "^44.10.0",
+    "playwright-core": "^1.63.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3"
+  },
+  "license": "Apache-2.0"
+}

@@ -1,0 +1,23 @@
+SeohoKim Loop
+Copyright 2026 SeohoKim
+SPDX-License-Identifier: Apache-2.0
+
+Identified project-owned source, configuration and documentation files in this
+prepared tree are licensed under the Apache License, Version 2.0 (see LICENSE).
+They are identified by inline SPDX-License-Identifier comments or adjacent
+<filename>.license files. These markings apply only to the identified files.
+
+Third-party license/notice archives, licenses/notices-supplement.txt and
+licenses/manifest.json retain their original terms and attribution. They are
+not assigned SeohoKim copyright or blanket-relicensed by this project.
+package-lock.json contains dependency metadata with original package licenses;
+only its root package license field identifies this project's Apache-2.0 license.
+See THIRD_PARTY_NOTICES.md and licenses/manifest.json for original notice access.
+
+No third-party implementation, model weights, font binary, external CLI or
+Windows distribution binary is bundled in this source tree. Installing external
+dependencies does not change their licenses. Binary redistribution and codec
+rights require separate clearance.
+
+This notice does not modify the Apache License or any upstream license.
+No affiliation with or endorsement by third-party AI providers is claimed.

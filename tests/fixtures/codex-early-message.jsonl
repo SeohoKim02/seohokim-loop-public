@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"synthetic-thread"}
+{"type":"item.completed","item":{"id":"synthetic-message","type":"agent_message","text":"LOOP_OK","phase":"final_answer"}}
+{"type":"turn.started"}
+{"type":"turn.completed","usage":{"input_tokens":1,"cached_input_tokens":0,"output_tokens":1,"reasoning_output_tokens":0}}

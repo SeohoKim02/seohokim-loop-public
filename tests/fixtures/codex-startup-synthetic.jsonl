@@ -1,0 +1,5 @@
+{"type": "thread.started", "thread_id": "synthetic-thread"}
+{"type": "item.completed", "item": {"id": "synthetic-warning", "type": "error", "message": "Synthetic startup diagnostic"}}
+{"type": "turn.started"}
+{"type": "item.completed", "item": {"id": "synthetic-answer", "type": "agent_message", "text": "LOOP_OK"}}
+{"type": "turn.completed", "usage": {"input_tokens": 1, "cached_input_tokens": 0, "output_tokens": 1}}

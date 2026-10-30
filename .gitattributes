@@ -1,0 +1,7 @@
+# Copyright 2026 SeohoKim
+# SPDX-License-Identifier: Apache-2.0
+
+* text=auto eol=lf
+
+# Preserve original license/notice bytes, including their upstream whitespace.
+licenses/** -text -whitespace

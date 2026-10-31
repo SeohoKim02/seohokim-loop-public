@@ -18,6 +18,15 @@ One request. Multiple AI providers. One collaborative workflow.
 - Provider별 구현을 분리한 구조와 단계별 결과 전달
 - 초안·검토·개선 과정, 취소·실패 상태, 로컬 History와 Markdown Export
 
+### 공식 데모 v0.2
+
+**Mock 실행 데모이며 실제 AI 호출은 없습니다.** 반복되는 미리보기는 실제 Windows 앱의 요청 입력 → Start Loop 클릭 → 단계 진행·결과 확인을 보여줍니다. 한 개의 Mock Provider를 사용하며 실제 다중 AI 협업 실행이 아닙니다.
+
+[![SeohoKim Loop Mock 미리보기: 요청 입력, Start Loop, 단계 진행과 결과 확인](assets/demos/SeohoKim-Loop-preview-v0.2.gif)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4)
+
+[전체 데모 보기 (MP4)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4) — 33초, 1080p, 30fps, 무음, 1.52MiB. GIF: 약 12초 반복, 960KiB.
+전체 영상에는 Final Result와 별도로 구분한 초안 → 검토 → 개선 설명이 포함됩니다. 이 설명은 실제 Provider 협업 실행이나 모델 품질 검증 기록이 아닙니다.
+
 **Windows x64 · 소스 Preview · Apache-2.0 · 기본 Mock 데모는 AI 계정 불필요**
 
 이 저장소는 **초기 오픈소스 Preview**입니다. Windows 설치판은 제공하지 않으며,
@@ -50,7 +59,7 @@ Electron 다운로드가 실패하면 네트워크·프록시 정책에 따라 n
 3. 요청 이해 → 작업 계획 → 초안 생성 → 결과 검토 → 최종 정리를 거쳐 Final Result와 각 단계의 예시 출력을 확인합니다.
 
 최종 결과에는 Mock 데모이며 실제 조사·분석이나 AI 호출을 수행하지 않았다는 안내가 표시됩니다.
-이 데모는 실행 흐름을 보여줍니다. 실제 두 AI의 응답 품질을 증명하는 데모나 완성된 홍보 영상은 아닙니다.
+위 영상은 Mock 실행 흐름을 보여줍니다. 실제 두 AI의 응답 품질이나 협업 성공을 증명하는 기록은 아닙니다.
 
 ## 개발 검증
 

@@ -15,6 +15,15 @@ Keep a task and its intermediate results in one place instead of copying replies
 Use a simple desktop interface, separate provider adapters, visible step results, cancellation, local history and Markdown export.
 This project coordinates existing AI services and local models; it does not train a new model.
 
+### Official demo v0.2
+
+**Mock workflow demo — no real AI calls.** This repeating preview shows the real Windows app: enter a request, click Start Loop and inspect step outputs. It uses one Mock provider, not real multi-AI collaboration.
+
+[![SeohoKim Loop Mock preview: request input, Start Loop, step progress and results](assets/demos/SeohoKim-Loop-preview-v0.2.gif)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4)
+
+[Watch the full demo (MP4)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4) — 33 seconds, 1080p, 30 fps, silent, 1.52 MiB. GIF: 12-second loop, 960 KiB.
+The full video includes Final Result and a separately labeled Draft → Review → Improve explainer; that diagram is not a recorded real-provider run or evidence of model quality.
+
 **Windows x64 · source preview · Apache-2.0 · no AI account needed for the default Mock demo**
 
 This is an early open-source preview, not a Windows installer. Identified project-owned source, configuration and documentation
@@ -44,7 +53,7 @@ to npm and GitHub distribution files. Do not disable security checks or substitu
 Choose Single AI, select Mock AI, enter a fictional reading-club announcement request and press Start Loop.
 The five demo steps cover request understanding, planning, drafting, review and final organization. Inspect the step outputs and Final Result.
 The final output explicitly identifies itself as a Mock demonstration with no real research, analysis or AI call.
-This demonstrates execution flow, not real-model quality improvement. No promotional video or real-model demo recording is included. The current UI is primarily Korean; select **단일 AI** for Single AI.
+This demonstrates execution flow, not real-model quality improvement. The video above records the Mock workflow; no real-model demo recording is included. The current UI is primarily Korean; select **단일 AI** for Single AI.
 
 ## Verification
 

@@ -53,7 +53,19 @@ to npm and GitHub distribution files. Do not disable security checks or substitu
 Choose Single AI, select Mock AI, enter a fictional reading-club announcement request and press Start Loop.
 The five demo steps cover request understanding, planning, drafting, review and final organization. Inspect the step outputs and Final Result.
 The final output explicitly identifies itself as a Mock demonstration with no real research, analysis or AI call.
-This demonstrates execution flow, not real-model quality improvement. The video above records the Mock workflow; no real-model demo recording is included. The current UI is primarily Korean; select **단일 AI** for Single AI.
+This demonstrates execution flow, not real-model quality improvement. The video above records the Mock workflow; no real-model demo recording is included. Choose either UI language in the header; select **Single AI / 단일 AI** for this demo.
+
+## Language and original content
+
+Choose **Language → English** or **한국어** in the header. The initial language follows your system language (Korean for Korean locales, English otherwise). Your choice is saved locally and restored after restarting the app. If saving the preference fails, the app explains that it applies for this session only.
+
+Menus, settings, progress, safe errors, History, attachment/PDF preview controls, Markdown export and length diagnostics support both languages. Switching while a task is running changes the interface without restarting it or sending another AI request.
+
+**UI language and AI task language are independent.** User prompts, system instructions, context, attachments, provider/model selection and actual AI responses are not translated or changed by the language selector. Specify a desired response language in your request. Step outputs, Final Result, saved History and exported Markdown retain their original text.
+
+The free Mock demo creates deterministic examples in the language selected when you press **Start Loop**. Completed Mock results and their History entries are not regenerated when you change the interface language. Mock examples are not real AI responses.
+
+The v0.2 GIF and MP4 above show the earlier Korean interface. They do **not** demonstrate the new language selector. Windows-owned file-dialog controls follow the Windows language.
 
 ## Verification
 
@@ -78,7 +90,7 @@ OpenAI-compatible Chat Completions and Claude Messages require the user's API ac
 Ollama connects to a separately installed local server at 127.0.0.1:11434. General Auto/Fallback restrictions remain unchanged.
 Install [official Ollama](https://ollama.com/download/windows) and a suitable model only if using that connection; check model terms, storage and RAM/VRAM requirements.
 Ollama and Codex CLI are unnecessary for API-only use.
-Codex CLI source is a development-only adapter, disabled by default and in packaged builds.
+Codex CLI is disabled at the public application entry point in both development and production. A development environment variable cannot enable it. Its adapter remains available only to deterministic injected tests.
 Models, third-party CLI executables, authentication files and dependency binaries are not bundled.
 
 Free application plans do not imply free API calls or compatibility with every AI subscription.
@@ -90,7 +102,7 @@ Scanned/OCR and encrypted PDFs are unsupported. Binary redistribution is a separ
 
 Open **Connections** after trying the Mock demo:
 
-- **OpenAI-compatible API:** choose **연결 설정** (connection settings), enter your server base URL, supported model ID and your own API key, then save. The adapter uses Chat Completions, not every vendor-specific endpoint.
+- **OpenAI-compatible API:** choose **Set up connection / 연결 설정**, enter your server base URL, supported model ID and your own API key, then save. The adapter uses Chat Completions, not every vendor-specific endpoint.
 - **Claude API:** choose connection settings, enter a supported model ID and your own Anthropic API key, then save.
 - **Ollama:** separately install Ollama and a model whose terms you accept, disable its cloud features with `OLLAMA_NO_CLOUD=1`, and run its local server at `127.0.0.1:11434`. In Connections, refresh, select an installed model and save the selection. This preview supports local text-only Single AI; general Auto/Fallback participation remains disabled.
 
@@ -99,7 +111,7 @@ Saved API keys are protected through Electron's main-process storage. A ChatGPT 
 
 ## Plans and verification
 
-The prepared source passed 1,091 deterministic tests, Typecheck and Build; Mock Desktop execution was checked in development and production modes.
+The prepared source passed 1,188 deterministic tests, Typecheck and Build; Mock Desktop execution was checked in development and production modes.
 These checks do not certify real-model accuracy. The next product design topic is deterministic sales/inventory number diagnostics.
 Official OAuth, additional CLI adapters and automatic model-role enablement remain future considerations.
 Installers, automatic updates, user accounts, billing and Team features are not advertised as current functionality.

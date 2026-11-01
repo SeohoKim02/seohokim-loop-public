@@ -47,6 +47,7 @@ test('preview allows an empty file without fabricating text', () => {
 test('preview view has no IO, storage, execution or credential dependencies', async () => {
   const source = await readFile(new URL('../src/ui/AttachmentPreview.tsx', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /dangerouslySetInnerHTML|\beval\s*\(|new Function|fetch\s*\(|seohoKimLoop|electron|node:|localStorage|sessionStorage|console\.|apiKey/i);
-  assert.equal(source.match(/^import /gm)?.length, 1);
+  assert.equal(source.match(/^import /gm)?.length, 2);
+  assert.match(source, /import \{ useLanguage \} from '\.\.\/i18n\/react\.tsx'/);
   assert.match(source, /import type \{ TextAttachment \}/);
 });

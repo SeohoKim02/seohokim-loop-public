@@ -208,3 +208,9 @@ summary { cursor: pointer; width: fit-content; }
 .status-cancelled { color: #475569; background: #edf0f5; }
 .text-cancelled, .cancellation-message { color: #64748b; }
 .step-cancelled .step-number { color: #475569; background: #edf0f5; }
+.language-choice { display: flex; align-items: center; gap: 8px; margin-left: auto; font-size: 14px; }
+.language-choice select { width: auto; min-width: 112px; padding: 8px 12px; }
+.app-header { flex-wrap: wrap; gap: 12px; }
+.connection-heading, .step-heading { flex-wrap: wrap; gap: 8px; }
+.connection-status, .mode-badge { white-space: normal; }
+.request-footer > p { min-width: 0; }

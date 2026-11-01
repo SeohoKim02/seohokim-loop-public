@@ -121,6 +121,8 @@ for (const id of ['mock', 'openai-compatible', 'anthropic', 'codex-cli-local', '
 test('diagnostics have no transport, credentials, persistence, or model-policy dependencies', () => {
   const source = readFileSync(new URL('../src/application/output-length-diagnostics.ts', import.meta.url), 'utf8');
   const imports = [...source.matchAll(/from '([^']+)'/g)].map(match => match[1]);
-  assert.deepEqual(imports, ['../domain/loop.ts', './writing-constraints.ts']);
+  assert.deepEqual(imports, ['../domain/loop.ts', './writing-constraints.ts', './english-length-constraints.ts']);
+  const englishSource = readFileSync(new URL('../src/application/english-length-constraints.ts', import.meta.url), 'utf8');
+  assert.doesNotMatch(englishSource, /fetch\s*\(|seohoKimLoop|electron|node:|localStorage|sessionStorage|apiKey|model-policy/);
   assert.doesNotMatch(source, /\bfetch\s*\(|window\.|process\.|localStorage|console\.|node:/);
 });

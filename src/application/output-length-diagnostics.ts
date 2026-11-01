@@ -3,6 +3,7 @@
 
 import type { Loop } from '../domain/loop.ts';
 import { inspectWritingConstraints } from './writing-constraints.ts';
+import { extractEnglishLength } from './english-length-constraints.ts';
 
 export type LengthCondition = { minimum?: number; maximum?: number; label: string };
 export type LengthUnavailableReason = 'no_condition' | 'uncertain' | 'conflict' | 'invalid' | 'unavailable_result';
@@ -60,6 +61,7 @@ function unsupportedEvidence(text: string): LengthEvidence | undefined {
 function explainLengthExtraction(request: string): ExplainedExtraction {
   if (!request.trim()) return { available: false, reason: 'no_condition' };
   if (request.length > 20_000) return { available: false, reason: 'invalid' };
+  if (!/[가-힣]/.test(request) && /\b(?:characters?|chars?)\b/i.test(request)) return extractEnglishLength(request);
   if (/["'`“”‘’「」『』<>\[\]{}]/u.test(request)
     || /인용|원문|자료|첨부|예시|예문|출처|본문\s*:|참고\s*:/.test(request)
     || /대략|정도|내외|전후|쯤|가량|약\s*\d|대신|아니|말고|제외|빼고|않|지\s*마|금지|취소|무시|조건부|경우|만약|가능하면|각각|각\s|마다|문단별|줄별|단어|바이트|또는|혹은|거나|중\s*하나|선택|\b(?:or|words?|bytes?|characters?)\b/i.test(request)

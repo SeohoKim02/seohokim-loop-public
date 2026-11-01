@@ -7,6 +7,7 @@ import { ProviderError } from '../providers/provider-error.ts';
 import type { AutoRole } from '../domain/loop.ts';
 import { dependencyIssue } from '../domain/step-dependencies.ts';
 
+
 export interface TaskStep {
   readonly title: string;
   readonly role: AutoRole;

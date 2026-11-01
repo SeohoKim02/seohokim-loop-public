@@ -9,6 +9,9 @@ import { _electron } from 'playwright-core';
 export const background = process.argv.includes('--background');
 
 export async function launchDesktop(options) {
+  // Existing regression locators use Korean. Make that test locale explicit,
+  // independent of the host language; callers can override it for localization tests.
+  if (!options.args.some(arg => arg.startsWith('--lang='))) options = { ...options, args: [...options.args, '--lang=ko-KR'] };
   if (!background) return _electron.launch(options);
   const profileArg = options.args.find((arg) => arg.startsWith('--user-data-dir='));
   assert.ok(profileArg, 'Background smoke requires an isolated profile.');
@@ -46,9 +49,14 @@ export async function captureDesktop(desktop, page, options) {
     if (window.isVisible()) throw new Error('Background smoke window became visible.');
     const contents = window.webContents;
     const image = await new Promise((resolve, reject) => {
-      const painted = (_event, _rect, image) => { clearTimeout(timer); resolve(image); };
+      const painted = (_event, _rect, image) => {
+        // Initial offscreen startup can emit an empty surface before the first
+        // real frame. Keep the deadline and wait for pixels, never invent them.
+        if (image.isEmpty()) { setTimeout(() => { if (!contents.isDestroyed()) contents.invalidate(); }, 16); return; }
+        clearTimeout(timer); contents.removeListener('paint', painted); resolve(image);
+      };
       const timer = setTimeout(() => { contents.removeListener('paint', painted); reject(new Error('Hidden render timed out.')); }, 5000);
-      contents.once('paint', painted);
+      contents.on('paint', painted);
       contents.invalidate();
     });
     if (image.isEmpty()) throw new Error('Hidden capture returned no pixels.');

@@ -11,7 +11,8 @@ import type { OllamaBridge } from '../src/providers/ollama.ts';
 // Sandboxed preload: fixed operations only; no generic IPC, filesystem or credential read API.
 const bridge: ProviderBridge & ResultExportBridge & HistoryBridge & AttachmentBridge & OllamaBridge = {
   selectOllamaModel: (model) => ipcRenderer.invoke('seohokim-loop:ollama:select-model', model),
-  selectTextFiles: () => ipcRenderer.invoke('seohokim-loop:attachments:select-text'),
+  selectTextFiles: (locale) => locale === undefined ? ipcRenderer.invoke('seohokim-loop:attachments:select-text')
+    : ipcRenderer.invoke('seohokim-loop:attachments:select-text', locale),
   saveHistory: (input) => ipcRenderer.invoke('seohokim-loop:history:save', input),
   listHistory: (search) => search === undefined ? ipcRenderer.invoke('seohokim-loop:history:list')
     : ipcRenderer.invoke('seohokim-loop:history:list', search),

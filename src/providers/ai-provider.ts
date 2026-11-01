@@ -3,6 +3,8 @@
 
 import type { TextAttachment } from './text-attachments.ts';
 export interface ProviderRequest {
+  /** Deterministic Mock example language only; real adapters ignore this metadata. */
+  locale?: 'ko' | 'en';
   attachments?: readonly TextAttachment[];
   userRequest: string;
   stepTitle: string;

@@ -15,8 +15,9 @@ import type { Loop } from '../domain/loop.ts';
 import { isTerminalLoop } from '../domain/loop.ts';
 import { validateAttachmentInput, withTextAttachments } from '../providers/text-attachments.ts';
 import type { TextAttachment } from '../providers/text-attachments.ts';
+import type { Locale } from '../i18n/messages.ts';
 
-export function useLoop(providers: readonly ProviderConnection[]) {
+export function useLoop(providers: readonly ProviderConnection[], locale: Locale = 'ko') {
   const [providerId, setProviderId] = useState('mock');
   const [executionMode, setExecutionMode] = useState<'auto' | 'single' | 'collaboration'>('auto');
   const [reviewerId, setReviewerId] = useState('');
@@ -52,14 +53,14 @@ export function useLoop(providers: readonly ProviderConnection[]) {
       const attachments = validateAttachmentInput(userRequest.trim(), files);
       // This registry contains only public identities and IPC adapters, never credentials.
       const registry = new ProviderRegistry();
-      for (const summary of providers) registry.register(withTextAttachments(new IpcProvider(summary, window.seohoKimLoop), attachments), summary);
+      for (const summary of providers) registry.register(withTextAttachments(new IpcProvider(summary, window.seohoKimLoop, locale), attachments), summary);
       if (executionMode === 'auto') {
         setIsRunning(true);
         await new AutoLoopService(registry, { refreshRegistry: async () => {
           const reply = await window.seohoKimLoop!.listProviders();
           if (!reply.ok) throw new ProviderError(reply.error.code);
           const current = new ProviderRegistry();
-          for (const summary of reply.value) current.register(withTextAttachments(new IpcProvider(summary, window.seohoKimLoop!), attachments), summary);
+          for (const summary of reply.value) current.register(withTextAttachments(new IpcProvider(summary, window.seohoKimLoop!, locale), attachments), summary);
           return current;
         } }).run(userRequest, update, { signal: execution.signal });
         return;
@@ -75,7 +76,7 @@ export function useLoop(providers: readonly ProviderConnection[]) {
       }
       const service = executionMode === 'collaboration'
         ? new LoopService(new DraftReviewImprove(providerId, reviewerId), registry)
-        : new LoopService(new MockPlanner(connection.type === 'mock' ? 'demo' : 'single-work'), registry.get(providerId));
+        : new LoopService(new MockPlanner(connection.type === 'mock' ? 'demo' : 'single-work', connection.type === 'mock' ? locale : 'ko'), registry.get(providerId));
       const created = service.create(userRequest, 'manual');
       update(created);
       setIsRunning(true);

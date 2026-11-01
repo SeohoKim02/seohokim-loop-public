@@ -17,11 +17,12 @@ export class DraftReviewImprove implements LoopPlanner {
 
   plan(_userRequest: string): readonly PlannedStep[] {
     const { primaryProviderId, reviewerProviderId } = this.collaboration;
-    return [
+    const steps: PlannedStep[] = [
       { title: '초안 작성', role: 'primary', providerId: primaryProviderId },
       { title: '검토', role: 'reviewer', providerId: reviewerProviderId },
       { title: '개선', role: 'primary', providerId: primaryProviderId },
     ];
+    return steps;
   }
 
   buildRequest(request: ProviderRequest): ProviderRequest {

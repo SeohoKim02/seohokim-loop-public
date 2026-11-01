@@ -9,15 +9,17 @@ import { ATTACHMENT_BYTES, PDF_BYTES, ATTACHMENT_TYPES, AttachmentError, validat
 import type { TextAttachment } from '../src/providers/text-attachments.ts';
 import type { AttachmentReply } from '../src/application/attachment-ipc.ts';
 import { extractPdfText } from './pdf-text.ts';
+import { translate } from '../src/i18n/messages.ts';
+import type { Locale } from '../src/i18n/messages.ts';
 
 export function createTextFileInput(select: (options: OpenDialogOptions) => Promise<OpenDialogReturnValue>, files = fs, extractPdf = extractPdfText) {
   let busy = false;
-  return async (): Promise<AttachmentReply> => {
+  return async (locale: Locale = 'ko'): Promise<AttachmentReply> => {
     if (busy) return { status: 'failed', code: 'busy' };
     busy = true;
     try {
-      const selected = await select({ title: '파일 첨부', properties: ['openFile', 'multiSelections'],
-        filters: [{ name: '텍스트 및 PDF', extensions: [...ATTACHMENT_TYPES] }] });
+      const selected = await select({ title: translate(locale, '파일 첨부'), properties: ['openFile', 'multiSelections'],
+        filters: [{ name: translate(locale, '텍스트 및 PDF'), extensions: [...ATTACHMENT_TYPES] }] });
       if (selected.canceled) return { status: 'cancelled' };
       if (!Array.isArray(selected.filePaths) || selected.filePaths.length < 1 || selected.filePaths.length > 2) throw new AttachmentError('count');
       const attachments: TextAttachment[] = [];

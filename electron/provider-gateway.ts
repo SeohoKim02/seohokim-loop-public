@@ -30,7 +30,8 @@ export function validateExecution(value: unknown): ProviderExecution {
     || (Object.hasOwn(value, 'executionId') && !validExecutionId(value.executionId)) || !text(value.providerId, 100)
     || !record(value.request)) throw new ProviderError('INVALID_REQUEST');
   const request = value.request;
-  if (!exactKeys(request, ['userRequest', 'stepTitle', 'previousOutputs', 'isFinalStep', ...(Object.hasOwn(request, 'objective') ? ['objective'] : []), ...(Object.hasOwn(request, 'attachments') ? ['attachments'] : [])])
+  if (!exactKeys(request, ['userRequest', 'stepTitle', 'previousOutputs', 'isFinalStep', ...(Object.hasOwn(request, 'locale') ? ['locale'] : []), ...(Object.hasOwn(request, 'objective') ? ['objective'] : []), ...(Object.hasOwn(request, 'attachments') ? ['attachments'] : [])])
+    || (Object.hasOwn(request, 'locale') && request.locale !== 'ko' && request.locale !== 'en')
     || (Object.hasOwn(request, 'objective') && !text(request.objective, 2_000))
     || !text(request.userRequest, 20_000) || !text(request.stepTitle, 200)
     || typeof request.isFinalStep !== 'boolean' || !Array.isArray(request.previousOutputs)
@@ -49,6 +50,7 @@ export function validateExecution(value: unknown): ProviderExecution {
       userRequest: request.userRequest, stepTitle: request.stepTitle,
       previousOutputs: [...request.previousOutputs] as ProviderRequest['previousOutputs'],
       isFinalStep: request.isFinalStep,
+      ...(Object.hasOwn(request, 'locale') ? { locale: request.locale as 'ko' | 'en' } : {}),
       ...(attachments ? { attachments } : {}),
       ...(Object.hasOwn(request, 'objective') ? { objective: request.objective as string } : {}),
     },

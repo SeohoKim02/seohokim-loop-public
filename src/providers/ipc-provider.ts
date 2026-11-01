@@ -6,17 +6,20 @@ import { throwIfCancelled } from './cancellation.ts';
 import type { ProviderBridge } from './provider-ipc.ts';
 import type { ProviderConnection } from './provider-registry.ts';
 import { ProviderError } from './provider-error.ts';
+import { mockExampleLocale } from '../i18n/provider-language.ts';
 
 // Renderer-side adapter contains public identity and a narrow bridge, never credentials.
 export class IpcProvider implements AIProvider {
   readonly id: string;
   readonly displayName: string;
   private readonly bridge: ProviderBridge;
+  private readonly locale?: 'ko' | 'en';
 
-  constructor(connection: ProviderConnection, bridge: ProviderBridge) {
+  constructor(connection: ProviderConnection, bridge: ProviderBridge, locale?: 'ko' | 'en') {
     this.id = connection.id;
     this.displayName = connection.displayName;
     this.bridge = bridge;
+    this.locale = mockExampleLocale(connection.type, locale);
   }
 
   async execute(request: ProviderRequest, options?: ProviderExecutionOptions): Promise<ProviderResponse> {
@@ -29,7 +32,9 @@ export class IpcProvider implements AIProvider {
     };
     try {
       // Queue execution before its cancellation. No signal/controller crosses IPC.
-      const pending = this.bridge.executeProvider({ providerId: this.id, request, executionId });
+      const { locale: _exampleLocale, ...modelRequest } = request;
+      const pending = this.bridge.executeProvider({ providerId: this.id,
+        request: this.locale ? { ...modelRequest, locale: this.locale } : modelRequest, executionId });
       signal?.addEventListener('abort', cancel, { once: true });
       if (signal?.aborted) cancel();
       const reply = await pending;

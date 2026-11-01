@@ -3,4 +3,4 @@
 
 import type { AttachmentCode, TextAttachment } from '../providers/text-attachments.ts';
 export type AttachmentReply = { status: 'selected'; files: readonly TextAttachment[] } | { status: 'cancelled' } | { status: 'failed'; code: AttachmentCode };
-export interface AttachmentBridge { selectTextFiles(): Promise<AttachmentReply> }
+export interface AttachmentBridge { selectTextFiles(locale?: 'ko' | 'en'): Promise<AttachmentReply> }

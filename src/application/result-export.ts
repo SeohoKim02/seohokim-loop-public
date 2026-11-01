@@ -6,6 +6,7 @@ import type { Loop } from '../domain/loop.ts';
 // Matches the largest output accepted by the existing Provider IPC boundary.
 export const MAX_EXPORT_CHARACTERS = 200_000;
 export interface ResultExportRequest {
+  locale?: 'ko' | 'en';
   status: 'completed';
   finalResult: string;
 }
@@ -23,11 +24,11 @@ export function canExportResult(loop: Pick<Loop, 'status' | 'finalResult'>): boo
 }
 
 export async function exportCompletedResult(
-  loop: Pick<Loop, 'status' | 'finalResult'>, bridge?: ResultExportBridge,
+  loop: Pick<Loop, 'status' | 'finalResult'>, bridge?: ResultExportBridge, locale?: 'ko' | 'en',
 ): Promise<ResultExportReply> {
   if (!canExportResult(loop) || !bridge) return { status: 'failed' };
   try {
-    const reply = await bridge.exportMarkdown({ status: 'completed', finalResult: loop.finalResult! });
+    const reply = await bridge.exportMarkdown({ status: 'completed', finalResult: loop.finalResult!, ...(locale ? { locale } : {}) });
     return { status: reply?.status === 'saved' || reply?.status === 'cancelled' ? reply.status : 'failed' };
   } catch {
     return { status: 'failed' };

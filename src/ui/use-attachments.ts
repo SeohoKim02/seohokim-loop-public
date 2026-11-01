@@ -4,7 +4,9 @@
 import { useRef, useState } from 'react';
 import { AttachmentError, attachmentMessage, validateAttachmentInput, validateAttachments } from '../providers/text-attachments.ts';
 import type { TextAttachment } from '../providers/text-attachments.ts';
+import { useLanguage } from '../i18n/react.tsx';
 export function useAttachments(request: string) {
+  const { locale } = useLanguage();
   const [files, setFiles] = useState<readonly TextAttachment[]>([]);
   const [selecting, setSelecting] = useState(false);
   const [error, setError] = useState<string>();
@@ -14,7 +16,7 @@ export function useAttachments(request: string) {
     if (busy.current) return;
     busy.current = true; setSelecting(true); setError(undefined);
     try {
-      const reply = await window.seohoKimLoop?.selectTextFiles();
+      const reply = await window.seohoKimLoop?.selectTextFiles(locale);
       if (reply?.status === 'selected') setFiles(validateAttachments([...files, ...reply.files]));
       else if (reply?.status === 'failed') setError(attachmentMessage(reply.code));
       else if (!reply) setError(attachmentMessage('unavailable'));

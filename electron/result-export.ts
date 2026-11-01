@@ -7,6 +7,7 @@ import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import { canExportResult } from '../src/application/result-export.ts';
 import type { ResultExportReply, ResultExportRequest } from '../src/application/result-export.ts';
+import { isLocale, translate } from '../src/i18n/messages.ts';
 
 export const DEFAULT_RESULT_FILENAME = 'SeohoKim-Loop-Result.md';
 
@@ -31,7 +32,8 @@ export async function writeMarkdown(filePath: string, text: string): Promise<voi
 function validRequest(input: unknown): input is ResultExportRequest {
   if (!input || typeof input !== 'object' || Array.isArray(input)) return false;
   const data = input as Record<string, unknown>;
-  return Object.keys(data).length === 2 && Object.hasOwn(data, 'status') && Object.hasOwn(data, 'finalResult')
+  return Object.keys(data).length === (Object.hasOwn(data, 'locale') ? 3 : 2)
+    && (!Object.hasOwn(data, 'locale') || isLocale(data.locale)) && Object.hasOwn(data, 'status') && Object.hasOwn(data, 'finalResult')
     && data.status === 'completed' && typeof data.finalResult === 'string'
     && canExportResult({ status: data.status, finalResult: data.finalResult });
 }
@@ -45,12 +47,13 @@ export function createResultExporter(
     if (saving || !validRequest(input)) return { status: 'failed' };
     // Snapshot before awaiting the dialog; no Loop object or mutable metadata is retained.
     const text = input.finalResult;
+    const locale = input.locale ?? 'ko';
     saving = true;
     try {
       const selection = await showSaveDialog({
-        title: '최종 결과 Markdown 저장',
+        title: translate(locale, '최종 결과 Markdown 저장'),
         defaultPath: DEFAULT_RESULT_FILENAME,
-        buttonLabel: '저장',
+        buttonLabel: translate(locale, '저장'),
         filters: [{ name: 'Markdown', extensions: ['md'] }],
         properties: ['showOverwriteConfirmation', 'dontAddToRecent'],
       });

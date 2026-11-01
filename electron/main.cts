@@ -31,7 +31,7 @@ async function createWindow(): Promise<void> {
   };
   const store = new ConnectionStore(app.getPath('userData'), encryption);
   const anthropicStore = new ConnectionStore(app.getPath('userData'), encryption, undefined, 'anthropic');
-  const localCli = new CodexCliProvider(!app.isPackaged && process.env.SEOHOKIM_LOOP_CODEX_LOCAL === '1');
+  const localCli = new CodexCliProvider(false);
   const ollama = new OllamaProvider(new OllamaStore(app.getPath('userData')));
   const runtime = new ProviderRuntime(process.env, store, anthropicStore, localCli, ollama,
     localManualExperimentEnabled(app.isPackaged, process.env));

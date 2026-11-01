@@ -15,14 +15,16 @@ Keep a task and its intermediate results in one place instead of copying replies
 Use a simple desktop interface, separate provider adapters, visible step results, cancellation, local history and Markdown export.
 This project coordinates existing AI services and local models; it does not train a new model.
 
-### Official demo v0.2
+### Official demo v0.3
 
-**Mock workflow demo — no real AI calls.** This repeating preview shows the real Windows app: enter a request, click Start Loop and inspect step outputs. It uses one Mock provider, not real multi-AI collaboration.
+**Mock workflow demo — no real AI calls.** Recorded in the real Windows app: switch from Korean to English, keep a Korean request unchanged, select Mock AI, run the steps and inspect Final Result. This uses one Mock provider, not real multi-AI collaboration.
 
-[![SeohoKim Loop Mock preview: request input, Start Loop, step progress and results](assets/demos/SeohoKim-Loop-preview-v0.2.gif)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4)
+[![SeohoKim Loop v0.3: switch from Korean to English and enter a Korean request](assets/demos/SeohoKim-Loop-preview-v0.3.gif)](assets/demos/SeohoKim-Loop-Official-Demo-v0.3.mp4)
 
-[Watch the full demo (MP4)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4) — 33 seconds, 1080p, 30 fps, silent, 1.52 MiB. GIF: 12-second loop, 960 KiB.
-The full video includes Final Result and a separately labeled Draft → Review → Improve explainer; that diagram is not a recorded real-provider run or evidence of model quality.
+[Watch the full demo v0.3 (MP4)](assets/demos/SeohoKim-Loop-Official-Demo-v0.3.mp4) — 37.43 seconds, 1920×1080, 30 fps, silent. GIF: 9.69-second loop, 960×540, 716 KiB.
+Application Language: **English**. User Request: **Korean**. The interface changes; the original request stays intact. The video does not demonstrate automatic translation of AI responses or claim real-model quality improvement.
+
+Earlier demo v0.2 is preserved: [MP4](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4) · [GIF](assets/demos/SeohoKim-Loop-preview-v0.2.gif). It records the earlier Korean UI.
 
 **Windows x64 · source preview · Apache-2.0 · no AI account needed for the default Mock demo**
 
@@ -65,7 +67,7 @@ Menus, settings, progress, safe errors, History, attachment/PDF preview controls
 
 The free Mock demo creates deterministic examples in the language selected when you press **Start Loop**. Completed Mock results and their History entries are not regenerated when you change the interface language. Mock examples are not real AI responses.
 
-The v0.2 GIF and MP4 above show the earlier Korean interface. They do **not** demonstrate the new language selector. Windows-owned file-dialog controls follow the Windows language.
+The latest v0.3 demo shows the language selector in use. Windows-owned file-dialog controls follow the Windows language.
 
 ## Verification
 

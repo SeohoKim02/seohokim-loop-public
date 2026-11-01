@@ -18,14 +18,16 @@ One request. Multiple AI providers. One collaborative workflow.
 - Provider별 구현을 분리한 구조와 단계별 결과 전달
 - 초안·검토·개선 과정, 취소·실패 상태, 로컬 History와 Markdown Export
 
-### 공식 데모 v0.2
+### 공식 데모 v0.3
 
-**Mock 실행 데모이며 실제 AI 호출은 없습니다.** 반복되는 미리보기는 실제 Windows 앱의 요청 입력 → Start Loop 클릭 → 단계 진행·결과 확인을 보여줍니다. 한 개의 Mock Provider를 사용하며 실제 다중 AI 협업 실행이 아닙니다.
+**Mock 실행 데모이며 실제 AI 호출은 없습니다.** 실제 Windows 앱에서 한국어 → 영어 전환, 한국어 요청 원문 유지, Mock AI 선택, 단계 실행과 Final Result 확인을 촬영했습니다. 한 개의 Mock Provider를 사용하며 실제 다중 AI 협업 실행이 아닙니다.
 
-[![SeohoKim Loop Mock 미리보기: 요청 입력, Start Loop, 단계 진행과 결과 확인](assets/demos/SeohoKim-Loop-preview-v0.2.gif)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4)
+[![SeohoKim Loop v0.3: 한국어에서 영어로 전환하고 한국어 요청 입력](assets/demos/SeohoKim-Loop-preview-v0.3.gif)](assets/demos/SeohoKim-Loop-Official-Demo-v0.3.mp4)
 
-[전체 데모 보기 (MP4)](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4) — 33초, 1080p, 30fps, 무음, 1.52MiB. GIF: 약 12초 반복, 960KiB.
-전체 영상에는 Final Result와 별도로 구분한 초안 → 검토 → 개선 설명이 포함됩니다. 이 설명은 실제 Provider 협업 실행이나 모델 품질 검증 기록이 아닙니다.
+[전체 데모 v0.3 보기 (MP4)](assets/demos/SeohoKim-Loop-Official-Demo-v0.3.mp4) — 37.43초, 1920×1080, 30fps, 무음. GIF: 9.69초 반복, 960×540, 716KiB.
+앱 화면 언어는 **영어**, 사용자 요청은 **한국어**입니다. 화면 언어가 바뀌어도 요청 원문은 유지됩니다. AI 응답 자동 번역 기능이나 실제 모델의 품질 향상을 보여주는 영상은 아닙니다.
+
+이전 데모 v0.2도 보존합니다: [MP4](assets/demos/SeohoKim-Loop-Official-Demo-v0.2.mp4) · [GIF](assets/demos/SeohoKim-Loop-preview-v0.2.gif). 이전 한국어 UI를 촬영한 영상입니다.
 
 **Windows x64 · 소스 Preview · Apache-2.0 · 기본 Mock 데모는 AI 계정 불필요**
 
@@ -71,7 +73,7 @@ Electron 다운로드가 실패하면 네트워크·프록시 정책에 따라 n
 
 무료 Mock 데모는 **Start Loop를 누른 시점의 언어**로 결정론적인 예시를 만듭니다. 완료된 Mock 결과와 History는 언어 전환으로 다시 생성하지 않습니다. Mock은 실제 AI 응답이 아닙니다.
 
-위 v0.2 GIF·MP4는 이전 한국어 UI를 촬영한 영상이며, 새 언어 선택 기능을 보여주는 영상은 아닙니다. Windows 자체 파일 대화상자 조작부는 Windows 언어를 따릅니다.
+최신 v0.3 데모에는 실제 언어 선택 장면이 포함되어 있습니다. Windows 자체 파일 대화상자 조작부는 Windows 언어를 따릅니다.
 
 ## 개발 검증
 
